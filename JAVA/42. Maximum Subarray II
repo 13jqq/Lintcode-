@@ -1,0 +1,40 @@
+public class Solution {
+    /*
+     * @param nums: A list of integers
+     * @return: An integer denotes the sum of max two non-overlapping subarrays
+     */
+   public int maxTwoSubArrays(List<Integer> nums) {
+		        // write your code here
+			 if(nums == null || nums.size() == 0){
+				 return 0;
+			 }
+			 int max = Integer.MIN_VALUE;
+			 int len = nums.size();
+			 int[] left = new int[len];//左数 的子数组对应最大和
+			 int[] right = new int[len];
+			 int leftsum = 0;
+			 int rightsum = 0;
+			 for(int i = 0 ; i< len ; i ++){//算左子数组
+				 leftsum += nums.get(i) ;
+				 max = Integer.max(leftsum  , max);
+				 left[i] = max;	
+				 leftsum = Integer.max(leftsum, 0);
+				 
+			 }
+			 max = Integer.MIN_VALUE;
+			 for(int i = len - 1 ; i >= 0 ; i--){
+				 rightsum += nums.get(i);
+				 max = Integer.max(rightsum, max);
+				 right[i] = max;
+				 rightsum = Integer.max(rightsum, 0);
+			 }
+			 //int index = 0;
+			 max = Integer.MIN_VALUE;
+			 for( int  i = 0 ; i<len - 1 ;i++){
+				 if(left[i] + right[i+1] > max){
+					 max = left[i] + right[i+1];
+				 }
+			 }
+			 return max;
+		 }
+}
