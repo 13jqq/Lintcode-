@@ -1,0 +1,27 @@
+public class Solution {
+    /*
+     * @param nums: An integer array
+     * @return: nothing
+     */
+    public void recoverRotatedSortedArray(List<Integer> nums) {
+	        // write your code here
+		 int i = 0;
+		 while(i < nums.size() - 1){
+			 if(nums.get( i + 1 ) < nums.get(i)){
+				 break;
+			 }
+			 i++;
+		 }
+		 int j = 0;
+		 while( j <= i ){
+			 int t = nums.get(j);
+			 nums.add(t);
+			 j++;
+		 }
+		 j--;
+		 while( j >= 0){
+			 nums.remove(0);
+			 j--;
+		 }
+	 }
+}
