@@ -1,0 +1,40 @@
+/**
+ * Definition for ListNode.非递归！！
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int val) {
+ *         this.val = val;
+ *         this.next = null;
+ *     }
+ * }
+ */
+
+
+public class Solution {
+    /*
+     * @param head: n
+     * @return: The new head of reversed linked list.
+     */
+   public ListNode reverse(ListNode head) {
+		        // write your code here
+			 
+			 if(head == null || head.next == null ){
+				 return head;
+			 }
+			 
+			 ListNode sec = head.next;
+			 ListNode fir = head;
+			 while(sec != null){
+				 ListNode tmp = sec.next;
+				 sec.next = fir;
+				 fir = sec;
+				 sec= tmp;
+				 
+				
+			 }
+			 
+			 head.next = null;
+			 return fir;
+    }
+}
