@@ -1,0 +1,45 @@
+public class Solution {
+    /*
+     * @param nums: A list of integers.
+     * @return: A list of permutations.
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        // write your code here
+		
+		List<List<Integer>> li = new ArrayList<List<Integer>>();
+		if (nums == null) {
+             return li; 
+         }
+         
+         if (nums.length == 0) {
+            li.add(new ArrayList<Integer>());
+            return li ;
+         }
+		Arrays.sort(nums);
+		per(li,nums,0 , nums.length-1);
+		
+		return li ;
+		
+    }
+	public void per(List<List<Integer>> li ,int[] nums ,int from , int to){
+		if( from == to){
+			List<Integer> cur = new ArrayList();
+			for(int i: nums){
+				cur.add(i);
+			}
+			li.add(cur);
+			return;
+		}
+		for( int i = from; i < nums.length ;i++ ){
+			swap(nums , from , i);
+			per(li , nums , from+1 , to);
+			swap(nums , from , i);
+		}
+	}
+	public void swap (int[] arr , int i , int j){
+		int index = arr[i];
+		arr[i] = arr[j];
+		arr[j] = index;
+		
+	}
+}
