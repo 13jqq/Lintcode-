@@ -1,0 +1,24 @@
+public class Solution {
+    /*
+     * @param nums: a list of integers
+     * @return: find a  majority number
+     */
+    public int majorityNumber(List<Integer> nums) {
+        // write your code here
+		int can = nums.get(0) ;
+		int count = 1;
+		int total = nums.size();
+		for( int i = 1 ; i < total ; i++ ){
+			if( count == 0 ){
+				can = nums.get(i);
+			}else if( nums.get(i) == can ){
+				count ++;
+				
+			}else{
+				count -- ;
+			}
+		}
+		return can;
+    }
+
+}
