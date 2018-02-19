@@ -1,0 +1,40 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+
+public class Solution {
+    /*
+     * @param root: A Tree
+     * @return: Preorder in ArrayList which contains node values.
+     */
+    List<Integer> pre = new ArrayList<Integer>();
+	 public List<Integer> preorderTraversal(TreeNode root) {
+	        // write your code here
+		 pretra(root);
+		 
+		 return pre;
+		 
+		 
+	 }
+	 public void pretra(TreeNode root){
+		 if( root == null ){
+			 return ;
+		 }
+		 pre.add(root.val);
+		 if( root.left != null ){
+			 pretra(root.left);
+		 }
+		 if( root.right != null){
+			 pretra(root.right);
+		 }
+	 }
+}
