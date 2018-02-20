@@ -1,0 +1,37 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+
+public class Solution {
+    /*
+     * @param A: an integer array
+     * @return: A tree node
+     */
+    public TreeNode sortedArrayToBST(int[] A) {
+	        // write your code here
+		 if(A == null){
+			 return null;
+		 }
+		 return sort(A , 0 , A.length );
+	 }
+	 
+	 public TreeNode sort( int[] A , int from , int to ){
+		 if( from >= to){
+			 return null ;
+		 }
+		 int mid = ( to + from -1) /2;
+		 TreeNode root =  new TreeNode( A[mid]);
+		 root.left = sort(A , from , mid);
+		 root.right = sort( A , mid +1 , to);
+		 return root;
+	 }
+}
