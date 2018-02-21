@@ -1,0 +1,78 @@
+public class Solution {
+    /**
+     * @param s: an expression includes numbers, letters and brackets
+     * @return: a string
+     */
+       public String expressionExpand(String s) {
+	        // write your code here
+		 if( s == null || s.length() == 0){
+			 return "";
+		 }
+		String result = "" ;
+		Stack<String> ss = new Stack<String>();
+		Stack<Integer> ns = new Stack<Integer>();
+		char c ;
+		int tmpNum = 0 ;
+		String tmpString = "";
+		for( int i = 0 ; i < s.length() ; i++){
+			c = s.charAt(i);
+			if( c >= '0' && c <= '9' ){
+				while(i < s.length() && (s.charAt(i) >= '0' && s.charAt(i) <= '9')){ 
+					tmpNum = tmpNum*10 + s.charAt(i) - '0';  
+                    i++;  
+				}  
+                i--;  
+                ns.push(tmpNum);
+                tmpNum = 0;
+                continue;
+			}
+			
+			if( c == '[' ){
+				ss.push("[");
+				continue;
+			}
+			
+			if( Character.isLetter(c) ){
+				while( i< s.length() && Character.isLetter(s.charAt(i))){
+					tmpString += Character.toString(s.charAt(i));
+					i++;
+				}
+				i--;
+				if( ss.isEmpty() != true && ss.peek()!= "["){
+					tmpString = ss.pop() + tmpString;
+				}
+				ss.push(tmpString);
+				tmpString = "";
+				continue;
+			}
+			
+			if( c == ']'){
+				String tmp = ss.pop();
+				if( tmp  == "["){
+					ss.push(result);
+					continue;
+				}
+				int num = ns.pop();
+				if( num == 0){
+					 ss.pop();//将对应'['弹出
+					 continue;
+				}
+				String ind = tmp ;
+				for( int j = 2 ; j <= num ; j++){
+					tmp += ind; //将系数乘字符串
+				}
+				ss.pop();
+				if( ss.isEmpty() != true && ss.peek() != "["){
+					tmp = ss.pop() + tmp ;
+				}
+				ss.push(tmp);
+				tmpString = "";
+				continue;
+			}
+		}
+		while( !ss.empty()){
+			result += ss.pop();
+		}
+		return result;
+	 }
+}
