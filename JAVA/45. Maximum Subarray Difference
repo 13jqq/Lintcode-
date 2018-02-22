@@ -1,0 +1,65 @@
+public class Solution {
+    /**
+     * @param nums: A list of integers
+     * @return: An integer indicate the value of maximum difference between two substrings
+     */
+    public int maxDiffSubArrays(int[] nums) {
+	        // write your code here
+		 
+		 if( nums == null || nums.length < 2){
+			 return 0;
+		 }
+		 
+		 int len = nums.length;
+		 int[] leftMin = new int[len];
+		 int[] leftMax = new int[len];
+		 int[] rightMin = new int[len];
+		 int[] rightMax = new int[len];
+		 int localMin = 0;
+		 int globalMin = Integer.MAX_VALUE;
+		 int localMax = 0;
+		 int globalMax = Integer.MIN_VALUE;
+		 
+		 leftMin[0] = leftMax[0] =nums[0];
+		 rightMin[ len - 1] = rightMin[ len -1 ] = nums[len-1]; 
+		 for( int  i = 0 ; i< len ; i++){
+			 localMin = Integer.min(nums[i], localMin + nums[i]);
+			 globalMin = Integer.min(localMin, globalMin);
+			 
+			 leftMin[i] = globalMin;
+			 localMax = Integer.max(nums[i], localMax + nums[i]);
+			 globalMax = Integer.max(localMax, globalMax);
+			 
+			 leftMax[i] = globalMax ;
+		 }
+		 
+		 localMin = 0;
+		 globalMin = Integer.MAX_VALUE;
+		 localMax = 0;
+		 globalMax = Integer.MIN_VALUE;
+		 
+		 for( int i = len -1 ; i >= 0 ; i--){
+			 localMin = Integer.min(nums[i], localMin + nums[i]);
+			 globalMin = Integer.min(localMin, globalMin);
+			 
+			 rightMin[i] = globalMin;
+			 localMax = Integer.max(nums[i], localMax + nums[i]);
+			 globalMax = Integer.max(localMax, globalMax);
+			 
+			 rightMax[i] = globalMax ;
+		 }
+		 
+		 int leftResult = Integer.MIN_VALUE;
+		 int rightResult = Integer.MIN_VALUE;
+		 
+		 
+		 for( int i = 0 ; i < len - 1 ; i++){
+			 leftResult = Math.max(Math.abs(leftMax[i] - rightMin[i + 1]) , leftResult);
+			 rightResult = Math.max(Math.abs(leftMin[i] - rightMax[ i + 1]), rightResult);
+			 
+			 
+		 }
+		 
+		 return Math.max(leftResult, rightResult);
+	    }
+}
