@@ -1,0 +1,41 @@
+public class Solution {
+    /*
+     * @param A: An integer array
+     * @return: An integer array
+     */
+    public List<Integer> singleNumberIII(int[] A) {
+	        // write your code here
+		 
+		 if( A.length == 0 || A == null ){
+			 return null ;
+		 }
+		 List<Integer> list = new ArrayList<Integer>();
+		 int result1 = 0 ;//存放结果
+		 int result2 = 0 ;
+		 int len = A.length;
+		 int xor = 0; // 计算所有数异或的结果
+		 for( int i = 0 ; i < len ; i++){
+			 	xor ^= A[i];
+		 }
+		 
+		 int index = 0 ;//找xor的最后一个1
+		 while( index < 32 && (xor % 2) == 0){
+			 index++;
+			 xor >>= 1;
+		 }
+		 
+		 
+		 for( int i = 0; i < len ; i ++ ){
+			 if( ((A[i] >>> index) & 1 )== 0){
+				 result1 ^= A[i];
+			 }else{
+				 result2 ^= A[i];
+			 }
+		 }
+		 
+		 list.add(result1);
+		 list.add(result2);
+		 
+		 return list;
+	    }
+}
