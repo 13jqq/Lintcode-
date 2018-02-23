@@ -1,0 +1,41 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+
+public class Solution {
+    /*
+     * @param root: The root of binary tree.
+     * @return: An integer
+     */
+   private int max = Integer.MIN_VALUE;
+	  public int maxPathSum(TreeNode root) {
+	        // write your code here
+		  maxLen(root);
+		  return max;
+	    }
+	  
+	  public int maxLen( TreeNode root){
+		  	if( root == null ){
+		  		return 0;
+		  	}
+		  	int left = maxLen( root .left);
+		  	int right = maxLen( root.right);
+		  	
+		  	int singleSum = Math.max(  (Math.max(left,right) + root.val ) , root.val);//计算某一子树到跟的最大路径
+		  	
+		  	int curMax = Math.max(singleSum, right + left + root.val);//判断通过该根节点， 的最长路径
+		  	
+		  	max = Math.max(curMax, max);
+		  	
+		  	return singleSum;
+	  }
+}	
