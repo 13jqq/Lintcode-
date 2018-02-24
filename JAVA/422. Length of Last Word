@@ -1,0 +1,52 @@
+public class Solution {
+    /**
+     * @param s: A string
+     * @return: the length of last word
+     */
+     public int lengthOfLastWord(String s) {
+	        // write your code here
+		  
+		  
+		  if( s.length() == 0 || s == null){
+			  return 0;
+		  }
+		  
+		  int len = s.length();
+		  int index = -1 ; // 开始有字母的地方
+		  int length = 0;
+		  boolean flag = true;
+		  for( int i = len - 1; i >= 0 ; i --){
+			  if( s.charAt(i) == ' '){
+				  flag = false;
+			  }
+		  }
+		  if( flag == true){
+			  return len;
+		  }
+		  if( s.charAt(len - 1 ) == ' '){
+			  for( int i = len - 2 ; i >= 0 ; i -- ){
+				  if( s.charAt(i) != ' '){
+					  index = i;
+				  }
+			  }
+			  
+			  for( int i = index ; i >= 0 ; i -- ){
+				  if( s.charAt(i) == ' '){
+					  break;
+				  }
+				  length ++;
+			  }
+			  
+			  return length;
+		  }
+		  for( int i = len -1 ; i  >= 0 ; i -- ){
+			  if( s.charAt(i) == ' '){
+				  break;
+			  }
+			  length ++;
+		  }
+		  
+		  return length;
+		  
+	    }
+}	
