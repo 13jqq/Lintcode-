@@ -1,0 +1,35 @@
+public class Solution {
+    /*
+     * @param x: the base number
+     * @param n: the power number
+     * @return: the result
+     */
+    public double myPow(double x, int n) {
+	        // write your code here
+		  
+		  if( x == 0 ){
+			  return 0;
+		  }
+		  if( n == 0){
+			  return 1;
+		  }
+		  
+		  if( n  == 1){
+			  return x;
+		  }
+		  boolean flag = true;
+		  if( n < 0 ){
+			  flag = false;
+		  }
+		  int t = n / 2;
+		  int k = n - 2 * t;
+		  
+		  double pow1 = myPow( x ,Math.abs( t));
+		  double pow2 = myPow( x , Math.abs( k));
+		  if( flag ){
+			  return pow1 * pow1 * pow2;
+		  }else{
+			  return 1/(pow1 * pow1 * pow2);
+		  }
+	    }
+}	
