@@ -1,0 +1,26 @@
+public class Solution {
+    /**
+     * @param a: An integer
+     * @param b: An integer
+     * @return: The sum of a and b
+     */
+     /*//*
+	   * 《加法》，可以拆分成《异或得到的“加法不进位”》与《相与左移1的进位》的《加法》，
+	   * 因此，每次递归中都进行异或、相与左移1，然后，将得到的结果再做同样的操作，直到进位为0，递归停止。
+	   */
+    public int aplusb(int a, int b) {
+	        // write your code here
+		  if( a == 0 ){
+			  return b;
+		  }
+		  if( b == 0 ){
+			  return a;
+		  }
+		  
+		  int sum = a ^ b ;
+		  int carry = ( a & b) << 1;
+		  return aplusb( sum , carry);
+	    }
+	  
+	  
+}	
