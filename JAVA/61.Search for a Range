@@ -1,0 +1,68 @@
+public class Solution {
+    /**
+     * @param A: an integer sorted array
+     * @param target: an integer to be inserted
+     * @return: a list of length 2, [index1, index2]
+     */
+        public int[] searchRange(int[] A, int target) {
+	        // write your code here
+		  int[] result = new int[2]; 
+		  if( A.length == 0 || A == null ){
+			  result[0] = -1;
+			  result[1] = -1;
+			  return result;
+		  }
+		  if( A.length == 1){
+			  if( A[0] ==target){
+				  result[0] = 0;
+				  result[1] = 0;
+			  }
+			  else{
+				  result[0] = -1;
+				  result[1] = -1;
+			  }
+			  return result;
+		  }
+		  int min = 0;
+		  int max = A.length - 1;
+		  int from = -1;
+		  int to = -1;
+		  while(min <= max ){
+			  int mid = min + (max - min )/2;
+			  if( A[mid] == target){
+				  int i = mid;
+				  while(  i >= 0	){
+					  if(A[i] == target){
+					      i--;
+					  }else{
+					      break;
+					  }
+					     
+				  }
+				  from = i + 1;
+				  i = mid;
+				  while( i < A.length){
+					  if(A[i] == target){
+					      i++;
+					  }else{
+					      break;
+					  }
+					      
+				  }
+				  to = i -1;
+				  result[0 ] = from;
+				  result[1] = to;
+				  return result;
+			  }else if( A[mid] < target){
+				  min = mid + 1;
+			  }else{
+				  max = mid - 1;
+			  }
+		  }
+		  result[0 ] = from;
+		  result[1] = to;
+		  return result;
+	    }
+	  
+	  
+}	
