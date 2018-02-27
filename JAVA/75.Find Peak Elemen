@@ -1,0 +1,30 @@
+public class Solution {
+    /*
+     * @param A: An integers array.
+     * @return: return any of peek positions.
+     */
+    public int findPeak(int[] A) {
+	        // write your code here
+		  
+		  if( A.length == 3){
+			  return 1;
+		  }
+		  int min = 0 ; 
+		  int max = A.length - 1;
+		  while( min < max){
+			  int mid = min + (max - min )/2;
+			  if(A[mid - 1] < A[mid]){
+				  if( A[mid + 1] < A[mid]){
+					  return mid;
+				  }else{
+					  min = mid + 1;
+				  }
+			  }else{
+				  max = mid;
+			  }
+		  }
+		  return min ;
+	    }
+	  
+	  
+}
