@@ -1,0 +1,51 @@
+public class Solution {  
+    /** 
+      * @param start, a string 
+      * @param end, a string 
+      * @param dict, a set of string 
+      * @return an integer 
+      */  
+    public int ladderLength(String start, String end, Set<String> dict) {
+	        // write your code here
+		  if( start.equals(end)){
+			  return 1;
+		  }
+		  if( start == "" || end == "" ||dict == null ||start.length() != end.length()){
+			  return 0;
+		  }
+		  Queue<String> queue = new LinkedList<String>();
+		  Set<String > visit = new HashSet<String >();
+		  int level = 1 ;
+		  int last = 1;
+		  int curnum = 0;
+		  queue.offer(start);
+		  visit.add(start);
+		  while( !queue.isEmpty()){
+			  String cur = queue.poll();
+			  last -- ;
+			  for( int i = 0 ; i < cur.length() ; i++){
+				  char[] charcur = cur.toCharArray();
+				  for( char t = 'a' ; t < 'z' ; t ++){
+					  charcur[i] = t;
+					  String tmp = new String(charcur);
+					  if( tmp.equals(end)){
+						  return level + 1;
+					  }
+					  if(dict.contains(tmp) && !visit.contains(tmp)){
+						  curnum ++;
+						  queue.offer(tmp);
+						  visit.add(tmp);
+					  }
+				  }
+			  }
+			  if( last == 0){
+				  last  = curnum;
+				  curnum = 0;
+				  level ++;
+			  }
+		  }
+		  return 0;
+	  }
+	  
+	  
+}	
