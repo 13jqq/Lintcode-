@@ -1,0 +1,50 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param root: a TreeNode, the root of the binary tree
+     * @return: nothing
+     */
+     public void flatten(TreeNode root) {
+	        // write your code here
+		  if(root == null ){
+			  return ;
+		  }
+		 qian(root);
+		 queue.poll();
+		 while( !queue.isEmpty()){
+			 TreeNode cur = queue.poll();
+			 root.right = cur;
+			 root.left = null;
+			 root = root.right;
+		 }
+		 
+	    }
+	  Queue<TreeNode> queue = new LinkedList<TreeNode>();
+	  public Queue<TreeNode> qian(TreeNode root){
+		  if( root == null ){
+			  return queue;
+		  }
+		  
+		  queue.offer(root);
+		  if( root.left!= null ){
+			  
+			  qian(root.left);
+		  }
+		  if( root.right != null){
+			  
+			  qian(root.right);
+		  }
+		  return queue;
+	  }
+}	
