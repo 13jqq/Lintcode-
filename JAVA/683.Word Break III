@@ -1,0 +1,44 @@
+public class Solution {
+    /*
+     * @param : A string
+     * @param : A set of word
+     * @return: the number of possible sentences.
+     */
+     int count = 0;
+    public int wordBreak3(String s, Set<String> dict) {
+	        // Write your code here
+		  
+		 
+		  if( s == null || s.length() == 0 ){
+			  return 0;
+		  }
+		  if( dict == null || dict.size() == 0){
+			  return 0;
+		  }
+		  
+		  String tmpString = s.toLowerCase();
+		  Set<String > tmpDict = new HashSet<String>();
+		  for(String str : dict){
+			  tmpDict.add(str.toLowerCase());
+		  }
+		  
+		  helper1(tmpString , tmpDict , 0 );
+		  return count;
+		  
+	    }
+	  public void helper1(String s , Set<String > dict , int start ){
+		  if( start == s.length()){
+			  count ++;
+			  return ;
+		  }
+		  for( int i = start ; i < s.length() ; i ++){
+			  String sub = s.substring(start,  i + 1);
+			  if( dict.contains(sub)){
+				  helper1(s , dict , i + 1 );
+			  }
+		  }
+		  
+	  }
+	  
+	  
+}
