@@ -1,0 +1,38 @@
+public class Solution {
+    /**
+     * @param s: The first string
+     * @param t: The second string
+     * @return: true or false
+     */
+    public boolean anagram(String A, String B) {
+       if( (A == null && B == null)  || ( A.length() == 0 && B.length() ==0) ){
+				  return true;
+			  }
+			  
+			  if( A.length() != B.length() ){
+				  return false;
+			  }
+			  int aLen = A.length();
+			  int bLen = B.length();
+			  char[] achar = new char[aLen];
+			  char[] bchar = new char[bLen];
+			  List<Character> aList = new LinkedList<Character>(); 
+			  List<Character> bList = new LinkedList<Character>();
+			  for( int i = 0 ; i < aLen ; i++){
+				  aList.add(A.charAt(i));
+				  bList.add(B.charAt(i));
+				  achar[i] = A.charAt(i);
+				  bchar[i] = B.charAt(i);
+			  }
+			 Collections.sort(aList);
+			 Collections.sort(bList);
+			  Arrays.sort(achar);
+			  Arrays.sort(bchar);
+			  if( aList.equals(bList)){
+				  return true;
+			  }else{
+				  return false;
+			  }
+			  
+		  }
+}
