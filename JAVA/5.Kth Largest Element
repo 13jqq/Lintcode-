@@ -1,0 +1,60 @@
+class Solution {
+    /*
+     * @param k : description of k
+     * @param nums : array of nums
+     * @return: description of return
+     */
+     public static int[] quickSort( int[] A , int left , int  right){
+			  int i = left ; 
+			  int j = right ;
+			  if( left > right){
+				  return A;
+			  }
+			  int tmp = A[left];
+			  while( i < j){
+				  
+				  while( j > i && A[j] >= tmp ){
+					  j -- ;
+				  }
+				  while( i <j && A[i ] <= tmp) {
+					  i ++ ;
+				  }
+					  
+				  if(  i < j){
+					  int t  = A[i];
+					  A[i] = A[j];
+					  A[j ] =t;
+					  
+				  }
+			  }
+			  A[left] = A[i];
+			  A[i] = tmp;
+			 
+				  quickSort( A , left , j - 1);
+			  quickSort( A , j + 1 , right);
+			  
+				return A;  
+			  
+		
+				  
+		  }
+		  
+		  public int kthLargestElement(int k, int[] nums) {
+		        // write your code here
+			  if( nums == null || nums.length ==0){
+				  return 0;
+			  }
+			  int[] sorts = quickSort( nums , 0 , nums.length - 1);
+			  List<Integer> list = new LinkedList<Integer>();
+			  for( int i = 0 ; i < nums.length ; i++){
+				  list.add(sorts[i]);
+				  
+			  }
+			   
+			  Collections.reverse(list);
+			  
+			  
+			  return list.get(k - 1) ;
+		    }
+    
+};
