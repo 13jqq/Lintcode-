@@ -1,0 +1,46 @@
+public class Solution {
+    /**
+     * @param A an integer array
+     * @return a long integer
+     */
+    public long permutationIndex(int[] A) {
+			  /*//**
+			   * 6 –> 4x(7-1)!种
+			   * 8 –> 5x(7-2)!种
+			   * 4 –> 2x(7-3)!种
+			   * 7 –> 3x(7-4)!种
+			   * 5 –> 2x(7-5)!种
+			   * 3 –> 1x(7-6)!种
+			   * 2 –> 0x(7-7)!种 
+			   */
+		        // write your code here
+			  
+			  if( A == null  || A.length == 0){
+				  return 0 ;
+			  }
+			  long total = 1;
+			  int flag = A.length - 1;//表示阶乘
+			  for( int i =0 ; i < A.length ; i++){
+				  int count = 0; 
+				 for( int j = i + 1 ; j < A.length  ; j ++){
+					 if( A[ j ] < A[i ]){
+						 count ++;
+					 }
+				  }
+				  long j = flag;
+				  long jie = 1;
+				  while( j >= 1){
+					  jie *= j;
+					  j--;
+				  }
+				  total += jie * count;
+				  flag -- ;
+			  }
+			  
+			  return total;
+			  
+		    }
+				
+	}
+
+	
