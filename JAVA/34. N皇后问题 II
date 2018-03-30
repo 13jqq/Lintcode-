@@ -1,0 +1,65 @@
+public class Solution {
+    /*
+     * @param n: The number of queens
+     * @return: All distinct solutions
+     */
+        public int totalNQueens(int n) {
+        // write your code here
+		num = n;
+		int[][] chess = new int[n][n];
+		Nqueen(chess , 0);
+		return count;
+    }
+	static List<List<String>> res = new ArrayList<List<String>>();
+	static int num  = 0;
+	static int count = 0;
+	public static List<List<String>> Nqueen( int[][] chess , int row){
+		if(row == num ){
+			List<String> list = new ArrayList<String>();
+			count ++;
+			for( int i = 0 ; i < num ; i++){
+				String s = "";
+				for( int  j = 0 ; j < num ; j ++){
+					if( chess[i][j] == 1){
+						s += 'Q';
+						
+					}else{
+						s += '.';
+					}
+				}
+				list.add(s);
+			}
+			res.add(list);
+			return res;
+			
+		}
+		int[][] chessTmp = chess.clone();
+		for( int  i = 0  ; i < num ; i++){
+			for( int  j = 0 ; j < num ; j++){
+				chessTmp[row][j] = 0;
+			}
+			chessTmp[row][i] =1;
+			if( isSafe(chessTmp , row , i) ){
+				Nqueen(chess , row + 1);
+			}
+		}
+		return res;
+	}
+	public static boolean isSafe(int[][] chess , int row , int col){
+		int index = 1;
+		while( row - index >= 0){
+			int t = row - index;
+			if( chess[t][col] == 1){
+				return false;
+			}
+			if( col - index >= 0 && chess[t][col - index] == 1){
+				return false;
+			}
+			if( col + index < num && chess[t][col + index] == 1){
+				return false;
+			}
+			index ++;
+		}
+		return true;
+	}
+}
