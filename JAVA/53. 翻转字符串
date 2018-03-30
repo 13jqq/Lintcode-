@@ -1,0 +1,87 @@
+public class Solution {
+    /*
+     * @param s: A string
+     * @return: A string
+     */
+        public static String reverseWords(String s) {
+        // write your code here
+		if( s == null ){
+			return null;
+		}
+		if( s.length() == 0){
+			return s;
+		}
+		if( s.length() == 1 && s.charAt(0) ==  ' '){
+			return "";
+		}
+		if( s.length() == 1 ){
+			return s;
+		}
+		char a = s.charAt(0);
+		int start = 0;
+		while( a == ' ' && a < s.length()){
+			start ++;
+			if( start < s.length()){
+				a =s.charAt(start);
+			}
+		}
+		if( start == s.length() ){
+			return " ";
+		}
+		int end = s.length() - 1;
+		a = s.charAt(s.length() - 1);
+		while( a == ' ' && end >= 0){
+			end -- ;
+			if( end >= 0){
+				a = s.charAt(end);
+			}
+		}
+		List<String> list = new ArrayList<String>();
+		int count = 0;
+		for( int i = start ; i <= end ; ){
+			int j = start;
+			for( j = start ; j <= end ; j++){
+				if( s.charAt( j) == ' '){
+					break;
+				}
+			}
+			String index = s.substring(i , j);
+			list.add(index);
+			count ++;
+			start = j + 1;
+			while( a == ' '){
+				start ++;
+				a =s.charAt(start);
+			}
+			i  = start ;
+		}
+		List<String> re = rev(list);
+		String res = "";
+		for( int i = 0; i < re.size() ; i++){
+			if( i == 0 ){
+				;
+			}
+			else{
+				res += " ";
+			}
+			res += re.get(i);
+			
+		}
+		return res;
+	}
+	
+	public static List<String> rev( List<String> list ){
+		if(  list == null){
+			return null;
+		}
+		if( list.size() <= 1){
+			return list;
+		}
+		String index = list.get(0);
+		list.remove(0);
+		List<String > re = rev(list);
+		re.add(index);
+		return re;
+	}
+	
+}
