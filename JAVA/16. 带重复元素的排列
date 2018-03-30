@@ -1,0 +1,49 @@
+public class Solution {
+    /*
+     * @param :  A list of integers
+     * @return: A list of unique permutations
+     */
+    public List<List<Integer>> permuteUnique(int[] nums) {
+		res = new ArrayList<List<Integer>>();
+		set= new HashSet<List<Integer>>();
+		if( nums == null ){
+			return res ;
+		}
+		if( nums.length == 0){
+			List<Integer > list = new ArrayList<Integer>();
+			res.add(list);
+			
+			return res;
+		}
+		 unique(nums , 0);
+        // write your code here
+		for( List<Integer> list : set){
+			res.add(list);
+		}
+		
+		return res;
+		
+    }
+	static List<List<Integer>> res ; 
+	static Set<List<Integer>> set ;
+	public static void unique( int[] nums , int k){
+		if( k == nums.length - 1){
+			List<Integer> list = new ArrayList<Integer>();
+			for( int i =0 ; i < nums.length ; i++){
+				list.add(nums[i]);
+			}
+			set.add(list);
+			return ;
+			
+		}
+		for( int i = k ; i < nums.length ;  i++){
+			int t = nums[i];
+			nums[i] = nums[k];
+			nums[k] = t;
+			unique(nums , k + 1);
+			t = nums[i];
+			nums[i] = nums[k];
+			nums[k] = t;
+		}
+	}
+};
