@@ -1,0 +1,62 @@
+public class Solution {
+    /*
+     * @param : A string
+     * @param : A string
+     * @return: Count the number of distinct subsequences
+     */
+    public static int numDistinct(String S, String T) {
+        // write your code here
+		if( S == null ){
+			return 0;
+		}
+		if( S.length() == 0 && T .length() == 0){
+			return 1;
+		}
+		if( T.length() == 0){
+			return 1;
+		}
+		
+		if( T.equals(S)){
+			return 1;
+		}
+		int count = 0;
+		List<String> sList = subXu(S , T.length());
+		for( int i  =0 ; i< sList.size() ; i++){
+			if( sList.get(i) .equals(T)){
+				count ++;
+			}
+		}
+		return count;
+    }
+	
+	public static List<String> subXu(String s , int len){
+		List<String > list = new ArrayList<String>();
+		if( s == null ){
+			return list;
+		}
+		if( s .length() == 0){
+			list.add("");
+			return list;
+		}
+		qiuSub(s , 0 , len , "" , list);
+		return list;
+		
+		
+	}
+	public static void qiuSub( String s , int start ,int size , String res , List<String> list){
+		if( s == null || s.length() == 0){
+			return ;
+		}
+		
+		if( res.length() == size){
+			list.add(res);
+			return ;
+		}
+		for( int i = start ; i< s.length() ; i++){
+			res = res + s.charAt(i);
+			qiuSub( s , i + 1 , size , res , list);
+			res = res.substring(0, res.length() - 1);
+		}
+	}
+	
+};
