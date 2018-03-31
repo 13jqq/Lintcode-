@@ -1,0 +1,69 @@
+public class Solution {
+    /**
+     * @param s: input string
+     * @return: the longest palindromic substring
+     */
+    public String longestPalindrome(String s) {
+        // write your code here
+		if( s== null){
+			return "";
+		}
+		if( s.length() == 0){
+			return s;
+		}
+		if( s.length() == 1){
+			return s;
+		}
+		
+		List<String> list = subsub(s);
+		int max = 0;
+		String res = "";
+		for( int i = 0 ; i < list.size() ; i++){
+			String index = list.get(i);
+			if( hui(index) && index.length() > max){
+				max = index.length();
+				res = index;
+			}
+		}
+		return res;
+		
+    }
+	
+	
+	public static boolean hui( String s){
+		for( int i = 0 ,j = s.length() - 1; i <= j; i++ , j--){
+			if( s.charAt(i) != s.charAt(j)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public static List<String> subsub( String s){
+		List<String> list = new ArrayList<String>();
+		if( s == null ){
+			return list;
+		}
+		if( s.length() == 0){
+			list.add("");
+			return list;
+		}
+		//String sub = "";
+		for( int i = 0 ; i <= s.length() ; i++){
+			findSub(s , 0 , i , list);
+		}
+		return list;
+	}
+	
+	public static void findSub(String s , int start , int size , List<String> list){
+		if(s == null || s.length() == 0 ){
+			return ;
+		}
+		if( start + size <= s.length()){
+			String sub = s.substring(start, start + size);
+			list.add(sub);
+			findSub(s , start + 1 , size , list);
+		}
+	}
+	
+}
