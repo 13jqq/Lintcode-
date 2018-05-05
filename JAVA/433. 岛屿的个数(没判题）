@@ -1,0 +1,55 @@
+public int numIslands(boolean[][] grid) {
+        // write your code here
+		int m  = grid.length;
+		int n = 0;
+		for( int i = 0 ; i < m ; i ++){
+			n = grid[i].length;
+		}
+		int[][] index = new int[m][n];
+		for( int i = 0; i < m ; i++){
+			for( int j = 0 ; j  < n ; j++){
+				index[i][j] = 0;
+			}
+			
+			
+		}
+		int count = 0;
+		for( int i = 0 ; i < m ; i++){
+			for( int j = 0 ; j < n ; j++){
+				if( index[i][j] == 0 && grid[i][j] == true){
+					dfsDao(grid ,index ,i , j ,  ++count );
+				}
+			}
+				
+		}
+		return count;
+		
+		
+		
+		
+    }
+	
+	public static void dfsDao( boolean[][] grid , int[][] index , int i , int  j , int id){
+		if( i <0 || i >= m || j < 0 || j >= n){
+			return ;
+		}
+		if( grid[i][j] != true || index[i][j] != 0){
+			return ;
+		}
+		
+		
+		index[i][j] = id;
+		for( int t = -1 ; t <=1 ; t ++){
+			for( int k = -1 ; k <=1 ; k++){
+				if( (t == 0 && k == 0 ) || (t == k)){
+					;
+					
+				}else{
+					dfsDao( grid , index ,i + t , j + k , id);
+				}
+				
+			}
+		}
+		return ;
+	}
+	
