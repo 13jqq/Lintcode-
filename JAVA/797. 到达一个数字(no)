@@ -1,0 +1,31 @@
+/**
+     * @param target: the destination
+     * @return: the minimum number of steps
+     */
+    public static int reachNumber(int target) {
+        // Write your code here
+    	if( target == 0){
+    		return 0;
+    	}
+    	int min = Integer.MAX_VALUE;
+    	int index = 0;
+    	Queue<Integer> queue = new LinkedList<Integer>();
+    	queue.offer(0);
+    	while(!queue.isEmpty()){
+    		int t = queue.poll();
+    		index ++;
+    		if( t + index  == target || t - index == target){
+    			return index ;
+    		}
+    		
+    		
+    		
+    			
+    		   queue.offer(t + index);
+    		   queue.offer( t - index);
+    			
+    		
+    	}
+    	return -1;
+    }
+	
